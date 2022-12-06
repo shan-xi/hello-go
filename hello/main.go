@@ -1,6 +1,8 @@
 package main
 
 import (
+	"hello/service"
+	"hello/transport"
 	"net/http"
 	"os"
 
@@ -11,13 +13,13 @@ import (
 func main() {
 	logger := log.NewLogfmtLogger(os.Stderr)
 
-	var svc HelloService
-	svc = helloService{}
+	var svc service.HelloService
+	svc = service.HelloServiceInstance()
 
 	sayHelloHandler := httptransport.NewServer(
-		makeSayHelloEndpoint(svc),
-		decodeSayHelloRequest,
-		encodeResponse,
+		transport.MakeSayHelloEndpoint(svc),
+		transport.DecodeSayHelloRequest,
+		transport.EncodeResponse,
 	)
 
 	http.Handle("/sayHello", sayHelloHandler)

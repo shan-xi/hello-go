@@ -1,15 +1,16 @@
-package main
+package transport
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"hello/service"
 	"net/http"
 
 	"github.com/go-kit/kit/endpoint"
 )
 
-func makeSayHelloEndpoint(svc HelloService) endpoint.Endpoint {
+func MakeSayHelloEndpoint(svc service.HelloService) endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
 		req := request.(sayeHelloRequest)
 		v := svc.SayHello(req.Name)
@@ -25,7 +26,7 @@ type sayHelloResponse struct {
 	Message string `json:"message"`
 }
 
-func decodeSayHelloRequest(_ context.Context, r *http.Request) (interface{}, error) {
+func DecodeSayHelloRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	fmt.Println()
 	if r.Method == "POST" {
 		var request sayeHelloRequest
@@ -38,6 +39,6 @@ func decodeSayHelloRequest(_ context.Context, r *http.Request) (interface{}, err
 	}
 }
 
-func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
+func EncodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
 	return json.NewEncoder(w).Encode(response)
 }
