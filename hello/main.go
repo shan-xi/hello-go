@@ -1,17 +1,26 @@
 package main
 
 import (
+	"fmt"
+	"hello/db"
 	"hello/service"
 	"hello/transport"
 	"net/http"
 	"os"
 
-	"github.com/go-kit/kit/log"
 	httptransport "github.com/go-kit/kit/transport/http"
+	"github.com/go-kit/log"
+	"github.com/spf13/viper"
 )
 
 func main() {
 	logger := log.NewLogfmtLogger(os.Stderr)
+
+	viper.SetConfigFile(".env")
+	viper.ReadInConfig()
+
+	con := db.GetMongoDB(fmt.Sprintf("%v", viper.Get("MONGODB_URI")))
+	fmt.Println(con)
 
 	var svc service.HelloService
 	svc = service.HelloServiceInstance()

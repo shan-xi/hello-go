@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+    hello:
+        build: .
+        container_name: hello
+        depends_on:
+            - 'mongo'
+        environment:
+            - PORT=3000
+        ports:
+            - '3000:3000'
+        volumes:
+            - './:/app'
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
+    mongo:
+        image: 'mongo:latest'
+        container_name: mongo
+        ports:
+            - '27017:27017'
+        volumes:
+            - ./mongodata:/data/db
+        restart: always
+    mongo_express:
+        image: 'mongo-express:latest'
+        container_name: mongo_express
+        depends_on:
+            - 'mongo'
+        ports:
+            - '8081:8081'
+        restart: always

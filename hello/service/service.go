@@ -7,7 +7,7 @@ type HelloService interface {
 }
 
 func HelloServiceInstance() HelloService {
-	return helloService{}
+	return &helloService{}
 }
 
 type helloService struct{}
