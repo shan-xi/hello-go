@@ -1,12 +1,17 @@
-# hello-go
-golang hello world
+# Project Introduction
 
-# docker command - build golang app
+## hello
+    About simple project to show:
+    1. gokit + mongodb + postgres + docker-compose in local side
+    2. Deploy gokit to GKE 
+    
+
+- docker command - build golang app
 ```
 docker build -t spinliao/hello .
 docker run -d -p 80:3000 spinliao/hello
 ```
-# docker command - build mongodb
+- docker command - build mongodb
 ```
 docker pull mongo:latest
 docker run -d -p 27017:27017 --name mongodb mongo:latest
@@ -15,8 +20,7 @@ docker exec -it mongodb bash
 docker logs mongodb --follow
 ```
 
-
-# gke command - deploy go app on gke
+- gke command - deploy go app on gke
 ```
 gcloud config get-value project
 gcloud compute regions list
@@ -37,7 +41,7 @@ gcloud container clusters delete hello-go-gke --region us-west1
 gcloud artifacts docker images delete us-west1-docker.pkg.dev/go-microservice-370513/hello-go-repo/hello-go-gke
 ```
 
-# HotReload
+- HotReload
 ```
 github.com/githubnemo/CompileDaemon has some bugs
 After modifying mounted code, need to run docker restart CONTAINER_NAME
