@@ -135,7 +135,8 @@ func main() {
 		}
 		g.Add(func() error {
 			logger.Log("transport", "HTTP", "addr", *httpAddr)
-			return http.ServeTLS(httpListener, httpHandler, "cert.pem", "key.pem")
+			// return http.ServeTLS(httpListener, httpHandler, "cert.pem", "key.pem")
+			return http.Serve(httpListener, httpHandler)
 		}, func(error) {
 			httpListener.Close()
 		})
