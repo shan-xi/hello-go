@@ -2,9 +2,9 @@
 
 ## Demo
 
-    1. Using go-kit to CRUD with MongoDB and Postgres.
-    2. API Function: save user visit records in MongoDB and retrive results.
-    3. API Function: a todo list recorded in Postgres using gorm.  
+    1. Using go-kit to do CRUD with MongoDB and Postgres.
+    2. API: save user visit records in MongoDB and retrieve results.
+    3. API: a todo list recorded in Postgres using gorm.
     4. Using docker-compose to network all things.
 
 ## Command records
